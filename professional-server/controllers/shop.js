@@ -62,6 +62,16 @@ exports.getOrders = (req, res, next) => {
   });
 };
 
+exports.postCartDeleteProduct = (req, res) => {
+  const prodId = req.body.productId;
+  req.user
+    .deleteItemFromCart(prodId)
+    .then(result => res.redirect('/cart'))
+    .catch(err => {
+      console.log(err);
+    }) 
+};
+
 exports.getCheckout = (req, res, next) => {
   res.render('shop/checkout', {
     path: '/checkout',
